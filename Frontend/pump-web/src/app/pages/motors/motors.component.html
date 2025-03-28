@@ -1,0 +1,74 @@
+<h2>Добавить мотор</h2>
+
+<div class="motor-form">
+  <input [(ngModel)]="newMotor.name" placeholder="Название" />
+  <input [(ngModel)]="newMotor.description" placeholder="Описание" />
+  <input type="number" [(ngModel)]="newMotor.powerKw" placeholder="Мощность (кВт)" />
+  <input type="number" [(ngModel)]="newMotor.currentA" placeholder="Ток (А)" />
+  <input type="number" [(ngModel)]="newMotor.speedRpm" placeholder="Скорость (об/мин)" />
+  <input type="number" [(ngModel)]="newMotor.priceRub" placeholder="Цена (₽)" />
+
+  <button (click)="editMode ? updateMotor() : createMotor()">
+    {{ editMode ? 'Сохранить' : 'Создать' }}
+  </button>
+  <button *ngIf="editMode" class="cancel-btn" (click)="cancelEdit()">Отмена</button>
+</div>
+
+<hr />
+
+<!-- 🔍 Поиск -->
+<input
+  [(ngModel)]="searchTerm"
+  placeholder="Поиск по названию мотора"
+  class="search-input"
+/>
+
+<!-- 🔽 Сортировка -->
+<div class="sort-controls">
+  <label>Сортировать по: </label>
+  <select [(ngModel)]="sortField">
+    <option value="name">Названию</option>
+    <option value="priceRub">Цене</option>
+    <option value="powerKw">Мощности</option>
+  </select>
+
+  <select [(ngModel)]="sortDirection">
+    <option value="asc">По возрастанию</option>
+    <option value="desc">По убыванию</option>
+  </select>
+</div>
+
+<h2>Список моторов</h2>
+
+<div class="motors-list">
+  <div class="motor-card" *ngFor="let motor of filteredAndSortedMotors()">
+    <!-- Название и описание -->
+    <div class="motor-header">
+      <strong>{{ motor.name }}</strong> — <em>{{ motor.description }}</em>
+    </div>
+
+    <!-- Характеристики -->
+    <div class="motor-params">
+      <ul>
+        <li><strong>Мощность:</strong> {{ motor.powerKw }} кВт</li>
+        <li><strong>Ток:</strong> {{ motor.currentA }} А</li>
+        <li><strong>Скорость:</strong> {{ motor.speedRpm }} об/мин</li>
+        <li><strong>Цена:</strong> {{ motor.priceRub }} ₽</li>
+      </ul>
+    </div>
+
+    <!-- Где используется -->
+    <div *ngIf="motor.pumps?.length" class="motor-usage">
+      <em>Используется в насосах:</em>
+      <ul>
+        <li *ngFor="let pump of motor.pumps">{{ pump.name }}</li>
+      </ul>
+    </div>
+
+    <!-- Кнопки -->
+    <div class="motor-actions">
+      <button (click)="startEdit(motor)">Редактировать</button>
+      <button class="delete" (click)="deleteMotor(motor.id)">Удалить</button>
+    </div>
+  </div>
+</div>

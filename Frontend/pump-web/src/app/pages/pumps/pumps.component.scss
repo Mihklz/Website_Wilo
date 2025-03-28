@@ -1,0 +1,191 @@
+@use '../../../styles/variables' as *;
+
+.pump-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  input,
+  select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: $wilo-green;
+      outline: none;
+    }
+  }
+
+  button {
+    grid-column: 2 / 3;
+    justify-self: center;
+    padding: 0.6rem 1.5rem;
+    background-color: $wilo-green;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $wilo-dark;
+    }
+  }
+
+  button + button {
+    margin-left: 0.5rem;
+    background-color: #ccc;
+    color: #333;
+
+    &:hover {
+      background-color: #bbb;
+    }
+  }
+}
+
+.pump-search {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.sort-controls {
+  margin-bottom: 1rem;
+
+  select {
+    margin-left: 0.5rem;
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+}
+
+.pumps-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.pump-card {
+  background-color: white;
+  border: 1px solid $wilo-light;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  word-break: break-word;
+
+  .card-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+
+    .main-info {
+      ul {
+        padding-left: 1.2rem;
+        margin: 0.5rem 0;
+
+        li {
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+
+    .card-image {
+      margin-top: 0.5rem;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-height: 180px;
+        object-fit: contain;
+        border-radius: 4px;
+        display: block;
+      }
+    }
+  }
+
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  
+    button {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      background-color: $wilo-green;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+  
+      &:hover {
+        background-color: $wilo-dark;
+      }
+  
+      &.delete {
+        background-color: #d97b71;
+  
+        &:hover {
+          background-color: #af3f32;
+        }
+      }
+  
+      &.details {
+        background-color: #8799a5; 
+        color: white;
+  
+        &:hover {
+          background-color: #607686;
+        }
+      }
+    }
+  }
+  
+
+  .card-details {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    background-color: $wilo-light;
+    padding: 0.8rem;
+    border-radius: 6px;
+
+    strong {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0;
+
+      li {
+        margin-bottom: 0.3rem;
+      }
+    }
+  }
+}
+
+  

@@ -1,0 +1,60 @@
+<!-- Заголовок -->
+<h2>Добавить материал</h2>
+
+<!-- Форма создания/редактирования -->
+<div class="material-form">
+  <input [(ngModel)]="newMaterial.name" placeholder="Название" />
+  <input [(ngModel)]="newMaterial.description" placeholder="Описание" />
+
+  <button (click)="editMode ? updateMaterial() : createMaterial()">
+    {{ editMode ? 'Обновить' : 'Создать' }}
+  </button>
+
+  <button *ngIf="editMode" class="cancel-btn" (click)="cancelEdit()">Отмена</button>
+</div>
+
+<hr />
+
+<!-- Поиск -->
+<input
+  [(ngModel)]="searchTerm"
+  placeholder="Поиск по названию"
+  class="search-input"
+/>
+
+<!-- Сортировка -->
+<div class="sort-controls">
+  <label>Сортировать по: </label>
+  <select [(ngModel)]="sortField">
+    <option value="name">Названию</option>
+    <option value="description">Описанию</option>
+  </select>
+
+  <select [(ngModel)]="sortDirection">
+    <option value="asc">По возрастанию</option>
+    <option value="desc">По убыванию</option>
+  </select>
+</div>
+
+<!-- Список материалов -->
+<h2>Список материалов</h2>
+
+<div class="materials-list">
+  <div class="material-card" *ngFor="let material of filteredAndSortedMaterials">
+    <div class="material-header">
+      <strong>{{ material.name }}</strong>
+    </div>
+
+    <div class="material-description">
+      {{ material.description }}
+    </div>
+
+    <div class="material-actions">
+      <button (click)="startEdit(material)">Редактировать</button>
+      <button class="delete" (click)="deleteMaterial(material.id)">Удалить</button>
+    </div>
+  </div>
+</div>
+
+
+  

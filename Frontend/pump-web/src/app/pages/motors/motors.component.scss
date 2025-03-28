@@ -1,0 +1,155 @@
+@use '../../../styles/variables' as *;
+
+.motor-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 250px;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: $wilo-green;
+      outline: none;
+    }
+  }
+
+  button {
+    padding: 0.6rem 1.2rem;
+    background-color: $wilo-green;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $wilo-dark;
+    }
+
+    &.cancel-btn {
+      background-color: #ccc;
+      color: #333;
+
+      &:hover {
+        background-color: #bbb;
+      }
+    }
+  }
+}
+
+.search-input {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.sort-controls {
+  margin-bottom: 1.5rem;
+
+  select {
+    padding: 0.4rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-left: 0.5rem;
+  }
+}
+
+.motors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.motor-card {
+  background-color: $wilo-light;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  .motor-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+
+    em {
+      font-weight: normal;
+      font-style: italic;
+      margin-left: 0.5rem;
+    }
+  }
+
+  .motor-params {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0;
+
+      li {
+        list-style-type: disc;
+        margin-bottom: 0.2rem;
+      }
+    }
+  }
+
+  .motor-usage {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+
+    em {
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+      margin: 0;
+
+      li {
+        list-style: circle;
+      }
+    }
+  }
+
+  .motor-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    button {
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 4px;
+      background-color: $wilo-green;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: $wilo-dark;
+      }
+
+      &.delete {
+        background-color: #d97b71;
+
+        &:hover {
+          background-color: #af3f32;
+        }
+      }
+    }
+  }
+}

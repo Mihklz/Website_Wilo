@@ -1,0 +1,127 @@
+<h2>{{ editMode ? 'Редактировать насос' : 'Добавить насос' }}</h2>
+
+<div class="pump-form">
+  <input [(ngModel)]="newPump.name" placeholder="Название" />
+  <input [(ngModel)]="newPump.description" placeholder="Описание" />
+
+  <select [(ngModel)]="newPump.housingMaterialId">
+    <option [ngValue]="undefined">-- Выберите материал корпуса --</option>
+    <option *ngFor="let material of materials" [ngValue]="material.id">{{ material.name }}</option>
+  </select>
+
+  <select [(ngModel)]="newPump.impellerMaterialId">
+    <option [ngValue]="undefined">-- Выберите материал рабочего колеса --</option>
+    <option *ngFor="let material of materials" [ngValue]="material.id">{{ material.name }}</option>
+  </select>
+
+  <select [(ngModel)]="newPump.motorId">
+    <option [ngValue]="undefined">-- Выберите мотор --</option>
+    <option *ngFor="let motor of motors" [ngValue]="motor.id">{{ motor.name }}</option>
+  </select>
+
+  <input type="number" [(ngModel)]="newPump.priceRub" placeholder="Цена (₽)" />
+  <input type="number" [(ngModel)]="newPump.weightKg" placeholder="Вес (кг)" />
+  <input type="number" [(ngModel)]="newPump.maxPressureBar" placeholder="Макс давление(бар)" />
+  <input type="number" [(ngModel)]="newPump.liquidTemperatureC" placeholder="Темп. жидкости (°C)" />
+
+  <input [(ngModel)]="newPump.imageUrl" placeholder="URL изображения" />
+  <input type="file" #fileInput (change)="onFileSelected($event)" />
+
+  <img
+    *ngIf="newPump.imageUrl"
+    [src]="newPump.imageUrl"
+    alt="Превью изображения"
+    width="200"
+    style="margin: 0.5rem 0;"
+  />
+
+  <button (click)="editMode ? updatePump() : createPump()">
+    {{ editMode ? 'Сохранить' : 'Создать' }}
+  </button>
+  <button *ngIf="editMode" (click)="cancelEdit()">Отмена</button>
+</div>
+
+<hr />
+<h2>Список насосов</h2>
+
+<!-- Поиск -->
+<input
+  class="pump-search"
+  [(ngModel)]="searchTerm"
+  placeholder="Поиск по названию насоса"
+/>
+
+<!-- Сортировка -->
+<div class="sort-controls">
+  <label>Сортировать по: </label>
+  <select [(ngModel)]="sortField">
+    <option value="name">Названию</option>
+    <option value="priceRub">Цене</option>
+    <option value="weightKg">Весу</option>
+  </select>
+
+  <select [(ngModel)]="sortDirection">
+    <option value="asc">По возрастанию</option>
+    <option value="desc">По убыванию</option>
+  </select>
+</div>
+
+<div class="pumps-list">
+  <div class="pump-card" *ngFor="let pump of filteredAndSortedPumps()">
+    <div class="card-header">
+      <strong>{{ pump.name }}</strong> 
+    </div>
+
+    <div class="card-body">
+      <div class="main-info">
+        <span class="pump-description">{{ pump.description }}</span>
+
+        <ul>
+          <li><strong>Макс. давление:</strong> {{ pump.maxPressureBar }} бар</li>
+          <li><strong>Температура жидкости:</strong> {{ pump.liquidTemperatureC }} °C</li>
+          <li><strong>Вес:</strong> {{ pump.weightKg }} кг</li>
+          <li><strong>Цена:</strong> {{ pump.priceRub }} ₽</li>
+        </ul>
+      </div>
+
+      <div class="card-image" *ngIf="pump.imageUrl">
+        <img [src]="pump.imageUrl" alt="Изображение насоса" />
+      </div>
+    </div>
+
+    <div class="card-actions">
+      <button (click)="startEdit(pump)">Редактировать</button>
+      <button class="delete" (click)="deletePump(pump.id)">Удалить</button>
+      <button class="details" (click)="toggleDetails(pump.id)">
+        {{ selectedPumpId === pump.id ? 'Скрыть' : 'Подробнее' }}
+      </button>      
+    </div>
+
+    <div class="card-details" *ngIf="selectedPumpId === pump.id">
+      <strong>Подробности о моторе:</strong>
+      <ul *ngIf="getMotorDetails(pump.motorId) as motor">
+        <li>Название: {{ motor.name }}</li>
+        <li *ngIf="motor.powerKw">Мощность: {{ motor.powerKw }} кВт</li>
+        <li *ngIf="motor.currentA">Ток: {{ motor.currentA }} А</li>
+        <li *ngIf="motor.speedRpm">Скорость: {{ motor.speedRpm }} об/мин</li>
+        <li *ngIf="motor.priceRub">Цена: {{ motor.priceRub }} ₽</li>
+        <li *ngIf="motor.description">Описание: {{ motor.description }}</li>
+      </ul>
+
+      <strong>Подробности о материалах:</strong>
+      <ul>
+        <li *ngIf="getMaterialDetails(pump.housingMaterialId)">
+          Материал корпуса: {{ getMaterialDetails(pump.housingMaterialId)?.name }}
+        </li>
+        <li *ngIf="getMaterialDetails(pump.impellerMaterialId)">
+          Материал рабочего колеса: {{ getMaterialDetails(pump.impellerMaterialId)?.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
+
