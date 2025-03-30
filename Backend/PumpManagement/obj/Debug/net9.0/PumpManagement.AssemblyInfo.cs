@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PumpManagement")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+795796ee036119258fcb66b4e0039a955015a84b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aac0bef211ae47f71037ad2a25b2990ca4e9cacc")]
 [assembly: System.Reflection.AssemblyProductAttribute("PumpManagement")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PumpManagement")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
