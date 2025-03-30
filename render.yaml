@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: wilo-backend
+    env: docker
+    repo: https://github.com/Mihklz/Website_Wilo
+    branch: main
+    rootDir: Backend
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ConnectionStrings__DefaultConnection
+        value: Host=wilo-db;Port=5432;Database=pump_management_db;Username=postgres;Password=1234
+
+  - type: web
+    name: wilo-frontend
+    env: docker
+    repo: https://github.com/Mihklz/Website_Wilo
+    branch: main
+    rootDir: Frontend
+    dockerfilePath: Dockerfile
+    plan: free
+
+databases:
+  - name: wilo-db
+    plan: free
+    databaseName: pump_management_db
+    user: postgres
