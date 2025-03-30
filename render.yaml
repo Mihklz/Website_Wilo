@@ -24,8 +24,7 @@ services:
 
 databases:
   - name: wilo-db
-    user: wilo_user
-    password: 1234
     databaseName: pump_management_db
+    user: wilo_user
     plan: free
 
