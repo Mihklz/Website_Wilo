@@ -26,7 +26,7 @@ export interface Pump {
   providedIn: 'root'
 })
 export class PumpService {
-  private apiUrl = 'http://localhost:5097/api/pumps';
+  private apiUrl = 'https://wilo-backend.onrender.com/api/pumps';
 
   constructor(private http: HttpClient) {}
 

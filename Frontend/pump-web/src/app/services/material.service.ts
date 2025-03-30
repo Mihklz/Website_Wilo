@@ -12,7 +12,7 @@ export interface Material {
   providedIn: 'root'
 })
 export class MaterialService {
-  private apiUrl = 'http://localhost:5097/api/materials';
+  private apiUrl = 'https://wilo-backend.onrender.com/api/materials';
 
   constructor(private http: HttpClient) {}
 

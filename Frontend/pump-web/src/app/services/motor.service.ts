@@ -22,7 +22,7 @@ export interface Motor {
   providedIn: 'root'
 })
 export class MotorService {
-  private apiUrl = 'http://localhost:5097/api/motors';
+  private apiUrl = 'https://wilo-backend.onrender.com/api/motors';
 
   constructor(private http: HttpClient) {}
 
